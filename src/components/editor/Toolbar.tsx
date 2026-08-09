@@ -2,8 +2,11 @@ import { useState } from 'react'
 import { Download, Moon, Printer, RotateCcw, Sun, Upload } from 'lucide-react'
 import { exportCv, importCv } from '../../lib/io'
 import { selectActiveCv, useCvStore } from '../../store/useCvStore'
-import { Button, IconButton } from '../ui/Button'
+import { Button, IconButton, IconLink } from '../ui/Button'
+import { GithubMark } from '../ui/GithubMark'
 import { VersionSwitcher } from './VersionSwitcher'
+
+const REPO_URL = 'https://github.com/chanasia/cv-web'
 
 export function Toolbar({ pageCount }: { pageCount: number }) {
   const cv = useCvStore(selectActiveCv)
@@ -58,6 +61,9 @@ export function Toolbar({ pageCount }: { pageCount: number }) {
           <span className="mr-1 text-xs text-neutral-500 dark:text-neutral-400">
             {pageCount} {pageCount === 1 ? 'page' : 'pages'}
           </span>
+          <IconLink label="View the source on GitHub" href={REPO_URL}>
+            <GithubMark className="size-4" />
+          </IconLink>
           <IconButton label="Restore this version's original content" onClick={handleReset}>
             <RotateCcw className="size-4" />
           </IconButton>
