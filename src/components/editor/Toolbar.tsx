@@ -58,7 +58,9 @@ export function Toolbar({ pageCount }: { pageCount: number }) {
         </Button>
 
         <span className="ml-auto flex items-center gap-1">
-          <span className="mr-1 text-xs text-neutral-500 dark:text-neutral-400">
+          {/* Below lg the tab bar carries this, and keeping it here wrapped the
+              row onto two lines on a phone. */}
+          <span className="mr-1 hidden text-xs text-neutral-500 lg:inline dark:text-neutral-400">
             {pageCount} {pageCount === 1 ? 'page' : 'pages'}
           </span>
           <IconLink label="View the source on GitHub" href={REPO_URL}>

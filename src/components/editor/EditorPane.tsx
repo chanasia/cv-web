@@ -1,3 +1,4 @@
+import type { CSSProperties } from 'react'
 import { Plus } from 'lucide-react'
 import { useCvStore } from '../../store/useCvStore'
 import type { CvData, SectionKind } from '../../types/cv'
@@ -14,15 +15,26 @@ const NEW_SECTION_KINDS: { label: string; kind: SectionKind }[] = [
   { label: 'Custom', kind: 'custom' },
 ]
 
-export function EditorPane({ cv, pageCount }: { cv: CvData; pageCount: number }) {
+export function EditorPane({
+  cv,
+  pageCount,
+  className = '',
+}: {
+  cv: CvData
+  pageCount: number
+  className?: string
+}) {
   const width = useCvStore((s) => s.ui.editorWidth)
   const addSection = useCvStore((s) => s.addSection)
   const reorderSections = useCvStore((s) => s.reorderSections)
 
   return (
     <aside
-      style={{ width }}
-      className="flex shrink-0 flex-col border-l border-neutral-200 bg-neutral-100 print:hidden dark:border-neutral-700 dark:bg-neutral-950"
+      // The dragged width goes through a custom property rather than an inline
+      // `width`, so it can be applied from `lg` up only. An inline width would
+      // beat every responsive class and pin the pane to 460px on a phone.
+      style={{ '--editor-w': `${width}px` } as CSSProperties}
+      className={`w-full flex-col border-l border-neutral-200 bg-neutral-100 lg:w-(--editor-w) lg:shrink-0 print:hidden dark:border-neutral-700 dark:bg-neutral-950 ${className}`}
     >
       <Toolbar pageCount={pageCount} />
 

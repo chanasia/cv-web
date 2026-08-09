@@ -17,19 +17,24 @@ export function PreviewPane({
   pages,
   pageWidth,
   pageHeight,
+  className = '',
 }: {
   pages: Page[]
   pageWidth: number
   pageHeight: number
+  className?: string
 }) {
   const zoom = useCvStore((s) => s.ui.zoom)
   const setZoom = useCvStore((s) => s.setZoom)
   const { containerRef, scale } = useFitScale(pageWidth, zoom)
 
   return (
-    <div className="flex min-w-0 flex-1 flex-col bg-neutral-300 print:block print:overflow-visible print:bg-white dark:bg-neutral-900">
+    <div
+      className={`min-w-0 flex-1 flex-col bg-neutral-300 print:block print:overflow-visible print:bg-white dark:bg-neutral-900 ${className}`}
+    >
       <div className="flex shrink-0 items-center gap-2 border-b border-black/10 bg-white/60 px-4 py-2 text-xs text-neutral-600 print:hidden dark:border-white/10 dark:bg-neutral-800/60 dark:text-neutral-300">
-        <span className="font-medium">
+        {/* Below lg the tab bar already shows this. */}
+        <span className="hidden font-medium lg:inline">
           {pages.length} {pages.length === 1 ? 'page' : 'pages'}
         </span>
         <span className="ml-auto flex items-center gap-1">

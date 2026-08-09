@@ -44,7 +44,8 @@ export function Splitter({ onResize }: { onResize: (width: number) => void }) {
         document.body.style.cursor = 'col-resize'
         document.body.style.userSelect = 'none'
       }}
-      className="w-1 shrink-0 cursor-col-resize bg-neutral-300 transition-colors hover:bg-blue-500 print:hidden dark:bg-neutral-700 dark:hover:bg-blue-500"
+      // Pointless on a touch screen, where only one pane is visible anyway.
+      className="hidden w-1 shrink-0 cursor-col-resize bg-neutral-300 transition-colors lg:block hover:bg-blue-500 print:hidden dark:bg-neutral-700 dark:hover:bg-blue-500"
     />
   )
 }
