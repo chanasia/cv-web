@@ -3,6 +3,8 @@
 A CV editor with a live A4 preview. Edit on the right, watch the paper on the left,
 press Print and get a PDF that looks exactly like the preview.
 
+**[Open the live app →](https://chanasia.github.io/cv-web/)**
+
 ```bash
 npm install
 npm run dev
@@ -72,3 +74,13 @@ on a page. To swap it, drop the files in `public/fonts` and change `--font-cv`.
 | `npm run build` | typecheck + production build |
 | `npm run typecheck` | types only |
 | `npm run lint` | oxlint |
+
+## Deployment
+
+Pushing to `main` builds and publishes to GitHub Pages via
+[`.github/workflows/deploy.yml`](.github/workflows/deploy.yml). Set
+**Settings → Pages → Source** to **GitHub Actions** once, and the rest is automatic.
+
+`vite.config.ts` sets `base: './'`, so the build works from any path — a project
+page, a custom domain, or opened straight off disk — without hardcoding the
+repository name.
