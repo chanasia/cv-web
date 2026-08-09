@@ -1,0 +1,19 @@
+<!doctype html>
+<!-- `dark` is the default theme; App corrects it in a layout effect before the
+     first paint if the stored preference says otherwise. Without it here, the
+     pre-mount frame would flash white. -->
+<html
+  lang="en"
+  class="dark print:bg-white [print-color-adjust:exact] [-webkit-print-color-adjust:exact]"
+>
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>CV Web</title>
+  </head>
+  <body class="bg-neutral-100 dark:bg-neutral-950 print:bg-white!">
+    <div id="root"></div>
+    <script type="module" src="/src/main.tsx"></script>
+  </body>
+</html>
