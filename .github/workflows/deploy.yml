@@ -33,11 +33,11 @@ jobs:
       # runs `tsc -b` first, so this is covered by the one command.
       - run: npm run build
 
-      # enablement turns Pages on for the repo and points it at Actions. Without
-      # it this step fails on a repo where Pages was never set up by hand.
+      # Pages must already be enabled with Settings > Pages > Source = GitHub
+      # Actions. `enablement: true` looks like it would automate that, but
+      # creating a Pages site needs repo-admin rights that GITHUB_TOKEN does not
+      # have, so it just fails here.
       - uses: actions/configure-pages@v6
-        with:
-          enablement: true
 
       - uses: actions/upload-pages-artifact@v5
         with:

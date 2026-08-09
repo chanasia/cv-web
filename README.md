@@ -78,9 +78,12 @@ on a page. To swap it, drop the files in `public/fonts` and change `--font-cv`.
 ## Deployment
 
 Pushing to `main` builds and publishes to GitHub Pages via
-[`.github/workflows/deploy.yml`](.github/workflows/deploy.yml). No manual setup:
-`configure-pages` runs with `enablement: true`, so the workflow turns Pages on
-and points it at Actions by itself.
+[`.github/workflows/deploy.yml`](.github/workflows/deploy.yml).
+
+One manual step first, on a repository where Pages has never been used: set
+**Settings → Pages → Source** to **GitHub Actions**. The workflow cannot do this
+itself — creating a Pages site needs repo-admin rights that the workflow's
+`GITHUB_TOKEN` does not have.
 
 `vite.config.ts` sets `base: './'`, so the build works from any path — a project
 page, a custom domain, or opened straight off disk — without hardcoding the
