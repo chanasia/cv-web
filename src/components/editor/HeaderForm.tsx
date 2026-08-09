@@ -90,7 +90,7 @@ function ContactRow({ contact }: { contact: Contact }) {
       <div className="mt-1 pl-9">
         <TextInput
           value={contact.href ?? ''}
-          placeholder="Link (optional) — keeps the PDF clickable"
+          placeholder="Link (optional), keeps the PDF clickable"
           onChange={(e) => updateContact(contact.id, { href: e.target.value || undefined })}
           className="text-xs"
         />

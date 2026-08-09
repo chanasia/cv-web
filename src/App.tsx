@@ -5,10 +5,10 @@ import { PreviewPane } from './components/preview/PreviewPane'
 import { Splitter } from './components/ui/Splitter'
 import { usePagination } from './hooks/usePagination'
 import { flattenToBlocks } from './lib/blocks'
-import { useCvStore } from './store/useCvStore'
+import { useActiveCv, useCvStore } from './store/useCvStore'
 
 export default function App() {
-  const cv = useCvStore((s) => s.cv)
+  const cv = useActiveCv()
   const dark = useCvStore((s) => s.ui.dark)
   const setEditorWidth = useCvStore((s) => s.setEditorWidth)
 

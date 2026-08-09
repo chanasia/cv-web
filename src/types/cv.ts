@@ -87,4 +87,17 @@ export interface CvData {
   sections: Section[]
 }
 
+/**
+ * One tailored CV. Versions hold independent copies rather than sharing a
+ * common base: editing the one you are about to send must never quietly alter
+ * another, and a CV that has already gone out cannot be recalled. The cost is
+ * that a changed phone number has to be changed in each -- `duplicateVersion`
+ * exists so a new variant still starts from an existing one.
+ */
+export interface CvVersion {
+  id: Id
+  name: string
+  data: CvData
+}
+
 export const newId = (): Id => crypto.randomUUID()
