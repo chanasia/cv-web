@@ -1,6 +1,6 @@
 import { create } from 'zustand'
 import { persist } from 'zustand/middleware'
-import { aiEngineerVersion, defaultVersions } from '../data/defaultCv'
+import { AI_VERSION_ID, defaultVersions } from '../data/defaultCv'
 import {
   newId,
   type Bullet,
@@ -548,7 +548,7 @@ export const useCvStore = create<CvStore>()(
     }),
     {
       name: 'cv-web',
-      version: 3,
+      version: 4,
       migrate: (persisted, from) => {
         const state = persisted as Record<string, unknown>
 
@@ -559,17 +559,48 @@ export const useCvStore = create<CvStore>()(
         }
 
         // v2 held a single `cv`. Wrap it as the Full Stack version rather than
-        // dropping it -- it may hold real edits -- and add the AI version that
-        // only exists from v3 on.
+        // dropping it -- it may hold real edits.
         if (from < 3) {
           const single = state.cv as CvData | undefined
           const seeded = defaultVersions()
           return {
             ui: state.ui,
-            versions: single
-              ? [{ ...seeded[0]!, data: single }, aiEngineerVersion()]
-              : seeded,
+            versions: single ? [{ ...seeded[0]!, data: single }] : seeded,
             activeId: seeded[0]!.id,
+          }
+        }
+
+        // v4 drops the seeded AI Engineer version and ends the Yip In Tsoi role.
+        // Only an untouched "Present" date is rewritten, so user edits survive.
+        if (from < 4) {
+          const versions = (state.versions as CvVersion[])
+            .filter((v) => v.id !== AI_VERSION_ID)
+            .map((v) => ({
+              ...v,
+              data: {
+                ...v.data,
+                sections: v.data.sections.map((s) =>
+                  s.kind !== 'experience'
+                    ? s
+                    : {
+                        ...s,
+                        companies: s.companies.map((c) => ({
+                          ...c,
+                          roles: c.roles.map((r) =>
+                            r.id === 'r-yit-java' && r.dateRange === 'Oct 2025 - Present'
+                              ? { ...r, dateRange: 'Oct 2025 - Nov 2026' }
+                              : r,
+                          ),
+                        })),
+                      },
+                ),
+              },
+            }))
+          const safe = versions.length ? versions : defaultVersions()
+          return {
+            ...state,
+            versions: safe,
+            activeId: safe.some((v) => v.id === state.activeId) ? state.activeId : safe[0]!.id,
           }
         }
 

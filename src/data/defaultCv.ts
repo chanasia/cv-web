@@ -76,7 +76,7 @@ const fullStackCv: CvData = {
             {
               id: 'r-yit-java',
               title: 'Programmer / Java Developer',
-              dateRange: 'Oct 2025 - Present',
+              dateRange: 'Oct 2025 - Nov 2026',
               bullets: [
                 {
                   id: 'b-yit-1',
@@ -202,177 +202,10 @@ const fullStackCv: CvData = {
   ],
 }
 
-// ---------------------------------------------------------------------------
-// AI Engineer.
-//
-// Every claim below traces to the interview or to public repository code.
-// Three things are deliberately absent because they are not true:
-//   - no fine-tuning or training: models are used off the shelf and quantized
-//   - no LLM work experience: that is self-study, so it appears only under
-//     Projects and Skills, never under Experience
-//   - no infrastructure ownership: the deployment platform was someone else's
-// Experience also carries only work that reached production; the Thai ID OCR
-// exploration sits under Projects, where an unshipped experiment belongs.
-// ---------------------------------------------------------------------------
-
-const aiEngineerCv: CvData = {
-  header: header(),
-  sections: [
-    {
-      id: 's-experience',
-      kind: 'experience',
-      title: 'Experience',
-      visible: true,
-      companies: [
-        {
-          id: 'co-yipintsoi',
-          name: 'Yip In Tsoi & Co., Ltd.',
-          roles: [
-            {
-              id: 'r-yit-java',
-              title: 'Programmer / Java Developer',
-              dateRange: 'Oct 2025 - Present',
-              bullets: [
-                {
-                  id: 'b-ai-yit-1',
-                  text: 'Built Intelligent Search (INS): full-text search over both structured database records and unstructured PDFs/images read by a local Typhoon OCR vision model. Python indexer, RabbitMQ, Meilisearch, Spring Boot 4 / Java 21',
-                },
-                {
-                  id: 'b-ai-yit-2',
-                  text: 'Quantized the OCR model to fit the hardware it had to run on: INT4 on a 16 GB / 4-core dev node, holding the model to 8-10 GB so the rest of the stack still fitted, and INT8 on a 32 GB / 8-core UAT node for accuracy',
-                },
-                {
-                  id: 'b-ai-yit-3',
-                  text: 'Served the model locally on OpenVINO behind a FastAPI service, loading weights from NFS, with an OCR cache and template-driven extraction of Thai dates and digits',
-                },
-                {
-                  id: 'b-ai-yit-4',
-                  text: 'Designed the authentication service for ADFS and ThaiD (national digital ID) OIDC: JWT sessions with refresh-token rotation and deny-by-default RBAC',
-                },
-                {
-                  id: 'b-ai-yit-5',
-                  text: "Built the CI/CD pipeline the team deploys with, and tuned the model service's resource limits",
-                },
-              ],
-            },
-          ],
-        },
-        {
-          id: 'co-humanica',
-          name: 'Humanica Public Company Limited',
-          roles: [
-            {
-              id: 'r-humanica-intern',
-              title: 'Full-stacks developer (Cybersecurity Internship)',
-              dateRange: 'Apr 2024 - Oct 2024',
-              summary:
-                'A Questionnaire Management System (QMS) that speeds up compliance review by clustering similar questions and recommending standardized answers to reuse across products.',
-              bullets: [
-                {
-                  id: 'b-ai-hi-1',
-                  text: 'Implemented SBERT similarity search reaching 70% average accuracy, validated by the Compliance team lead over 47 test questions',
-                },
-                {
-                  id: 'b-ai-hi-2',
-                  text: 'Clustered incoming questions against past answers to reuse a standardized response',
-                },
-                {
-                  id: 'b-ai-hi-3',
-                  text: 'Built QMS with a Next.js frontend and Python backend, deployed as a Docker image',
-                },
-              ],
-            },
-            {
-              id: 'r-humanica-devops',
-              title: 'DevOps (Parttime)',
-              dateRange: 'Nov 2024 - Feb 2025',
-              bullets: [
-                {
-                  id: 'b-ai-hd-1',
-                  text: 'Integrated SonarQube into Jenkins and scripted auto-creation of projects per repository branch',
-                },
-                {
-                  id: 'b-ai-hd-2',
-                  text: 'Built a shared microservice pipeline: configure centrally, update every repository at once',
-                },
-              ],
-            },
-          ],
-        },
-      ],
-    },
-    {
-      id: 's-projects',
-      kind: 'custom',
-      title: 'Projects',
-      visible: true,
-      bullets: [
-        {
-          id: 'p-semantic',
-          text: 'semantic-search-system: final-year project extending the QMS internship work, with SBERT embeddings behind a Go API and TypeScript UI and MinIO for document storage',
-        },
-        {
-          id: 'p-thaiocr',
-          text: 'thai-id-ocr-synthetic: synthetic dataset generator for Thai ID card OCR, covering 12 Thai and English fields with an augmentation pipeline, emitted as images plus labels ready for training',
-        },
-        {
-          id: 'p-anime',
-          text: 'anime-recommendation: K-nearest-neighbours recommender for a Data Mining course, served from Flask behind a Svelte UI',
-        },
-      ],
-    },
-    {
-      id: 's-skills',
-      kind: 'skills',
-      title: 'Additional Skills',
-      visible: true,
-      lines: [
-        {
-          id: 'sk-ai',
-          label: 'AI / ML',
-          value: 'SBERT / sentence-transformers, OCR vision models, OpenVINO, Ollama, quantization',
-        },
-        {
-          id: 'sk-languages',
-          label: 'Languages',
-          value: 'Python, TypeScript, Java, Golang, SQL',
-        },
-        {
-          id: 'sk-backend',
-          label: 'Backend Frameworks',
-          value: 'FastAPI, Flask, Spring Boot, Nest.js',
-        },
-        {
-          id: 'sk-database',
-          label: 'Database & Search',
-          value: 'PostgreSQL, pgvector, SQL Server, MySQL, Redis, MinIO, Meilisearch (hybrid + vector)',
-        },
-        {
-          id: 'sk-devops',
-          label: 'DevOps',
-          value: 'Docker, Kubernetes, GitLab, Github, Jenkins, RabbitMQ',
-        },
-        {
-          id: 'sk-frontend',
-          label: 'Frontend',
-          value: 'React, Next.js, Angular',
-        },
-      ],
-    },
-    education(),
-  ],
-}
-
 export const FULL_STACK_VERSION_ID = 'v-fullstack'
+/** Seeded AI Engineer version, since removed; kept only so the store migration can drop it. */
 export const AI_VERSION_ID = 'v-ai-engineer'
-
-export const aiEngineerVersion = (): CvVersion => ({
-  id: AI_VERSION_ID,
-  name: 'AI Engineer',
-  data: aiEngineerCv,
-})
 
 export const defaultVersions = (): CvVersion[] => [
   { id: FULL_STACK_VERSION_ID, name: 'Full Stack Developer', data: fullStackCv },
-  aiEngineerVersion(),
 ]
